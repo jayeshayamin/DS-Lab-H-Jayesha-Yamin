@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int n;
+    cout<<"Enter number of months: ";
+    cin>>n;
+    int* array=new int[n];
+    for(int i=0;i<n;i++)
+    {
+        cout<<"Enter expense of month "<<i+1<<": ";
+        cin>>array[i];
+    }
+    int newcount;
+    cout<<"Enter new size: ";
+    cin>>newcount;
+    int* arraynew=new int[newcount];
+    for(int i=0;i<n;i++)
+    {
+        arraynew[i]=array[i];              
+    }
+    int x;
+    for(int i=n;i<newcount;i++)
+    {
+        cout<<"Enter new value at index "<<i+1<<": ";
+        cin>>x;
+        arraynew[i]=x;
+    }
+    delete[] array;
+    array=arraynew;
+    cout<<"Printing expense: \n";
+    int sum=0,avg=0;
+    for(int i=0;i<newcount;i++)
+    {
+        cout<<arraynew[i]<<" at month "<<i+1;
+        cout<<"\n";
+        sum+=arraynew[i];
+    }
+    avg=sum/newcount;
+    cout<<"Average of all expenses is: "<<avg;
+    delete[] arraynew;
+    return 0;
+}
