@@ -1,0 +1,90 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int r,c;
+    cout<<"rows: ";
+    cin>>r;
+    cout<<"cols: ";
+    cin>>c;
+
+    int** a = new int*[r];
+    int** b = new int*[r];
+    for(int i=0;i<r;i++) {
+        a[i] = new int[c];
+        b[i] = new int[c];
+    }
+
+    cout<<"enter matrix a:"<<endl;
+    for(int i=0;i<r;i++) {
+        for(int j=0;j<c;j++) {
+            cin>>a[i][j];
+        }
+    }
+
+    cout<<"enter matrix b:"<<endl;
+    for(int i=0;i<r;i++) {
+        for(int j=0;j<c;j++) {
+            cin>>b[i][j];
+        }
+    }
+
+    cout<<"a:"<<endl;
+    for(int i=0;i<r;i++) {
+        for(int j=0;j<c;j++) {
+            cout<<a[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+
+    cout<<"b:"<<endl;
+    for(int i=0;i<r;i++) {
+        for(int j=0;j<c;j++) {
+            cout<<b[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+
+    int** sum = new int*[r];
+    int** diff = new int*[r];
+    for(int i=0;i<r;i++) {
+        sum[i] = new int[c];
+        diff[i] = new int[c];
+    }
+
+    for(int i=0;i<r;i++) {
+        for(int j=0;j<c;j++) {
+            sum[i][j] = a[i][j] + b[i][j];
+            diff[i][j] = a[i][j] - b[i][j];
+        }
+    }
+
+    cout<<"a+b:"<<endl;
+    for(int i=0;i<r;i++) {
+        for(int j=0;j<c;j++) {
+            cout<<sum[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+
+    cout<<"a-b:"<<endl;
+    for(int i=0;i<r;i++) {
+        for(int j=0;j<c;j++) {
+            cout<<diff[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+
+    for(int i=0;i<r;i++) {
+        delete[] a[i];
+        delete[] b[i];
+        delete[] sum[i];
+        delete[] diff[i];
+    }
+    delete[] a;
+    delete[] b;
+    delete[] sum;
+    delete[] diff;
+
+    return 0;
+}
