@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+int main() {
+ int s;
+ cout<<"Enter number of students: ";
+ cin>>s;
+ int** jr=new int*[s];
+ int* coursecount=new int[s];
+ for(int i=0;i<s;i++)
+ {
+ cout<<"Enter number of courses for student "<<i+1<<": ";
+ cin>>coursecount[i];
+ jr[i] = new int[coursecount[i]];
+}
+float m;
+for(int i=0;i<s;i++)
+{
+    for(int j=0;j<coursecount[i];j++)
+    {
+        cout<<"Enter marks for student "<<i+1<<" Course "<<j+1<<": ";
+        cin>>m;
+        jr[i][j]=m;
+    }
+}
+float sum,avg;
+for(int i=0;i<s;i++)
+{
+    sum=0,avg=0;
+    for(int j=0;j<coursecount[i];j++)
+    {
+        sum+=jr[i][j];
+    }
+    avg=sum/coursecount[i];
+    cout<<"Average of student "<<i+1<<": "<<avg<<endl;
+}
+return 0;
+}  
