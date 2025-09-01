@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+class safeptr {
+    int* p;
+public:
+    safeptr() {
+        p = new int;
+    }
+    void setvalue(int v) {
+        *p = v;
+    }
+    int getvalue() {
+        return *p;
+    }
+    void release() {
+        delete p;
+        p = 0;
+    }
+};
+
+int main() {
+    safeptr marks[5];
+    for(int i=0;i<5;i++) {
+        int x;
+        cout<<"enter marks of student "<<i+1<<": ";
+        cin>>x;
+        marks[i].setvalue(x);
+    }
+
+    cout<<"stored marks:"<<endl;
+    for(int i=0;i<5;i++) {
+        cout<<"student "<<i+1<<": "<<marks[i].getvalue()<<endl;
+    }
+
+    for(int i=0;i<5;i++) {
+        marks[i].release();
+    }
+
+    return 0;
+}
