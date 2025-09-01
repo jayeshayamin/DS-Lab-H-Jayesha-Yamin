@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node* next;
+};
+
+node* insert(node* head, int value) {
+    node* newnode = new node{value, nullptr};
+    if (!head) return newnode;
+    node* temp = head;
+    while (temp->next) temp = temp->next;
+    temp->next = newnode;
+    return head;
+}
+
+node* reverse(node* curr) {
+    node* prev = nullptr;
+    node* next = nullptr;
+    while (curr) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+
+bool ispalindrome(node* head) {
+    if (!head || !head->next) return true;
+
+    node* slow = head;
+    node* fast = head;
+
+    while (fast->next && fast->next->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    node* second = reverse(slow->next);
+    node* first = head;
+    node* check = second;
+
+    while (check) {
+        if (first->data != check->data) return false;
+        first = first->next;
+        check = check->next;
+    }
+    return true;
+}
+
+int main() {
+    node* head = nullptr;
+    int n, val;
+    cout << "enter number of elements: ";
+    cin >> n;
+    cout << "enter elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> val;
+        head = insert(head, val);
+    }
+
+    if (ispalindrome(head)) {
+        cout << "true";
+    } else {
+        cout << "false";
+    }
+    return 0;
+}
