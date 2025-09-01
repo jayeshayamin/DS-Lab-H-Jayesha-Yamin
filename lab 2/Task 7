@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int d,e;
+    cout<<"Enter number of departments: ";
+    cin>>d;
+    float** jagged=new float*[d];
+    int* employeecount=new int[d];
+    for(int i=0;i<d;i++)
+    {
+        cout<<"Enter number of employees for department "<<i+1<<": ";
+        cin>>employeecount[i];
+        jagged[i]=new float[employeecount[i]];
+    }
+    for(int i=0;i<d;i++)
+    {
+        for(int j=0;j<employeecount[i];j++)
+        {
+            cout<<"Salary for Department "<<i+1<<" Employee "<<j+1<<": ";
+            cin>>jagged[i][j];
+        }
+    }
+    float highestsalary;
+    int count;
+    float maxsalary[d];
+    for(int i=0;i<d;i++)
+    {count=0;
+        highestsalary=0;
+        maxsalary[i]=0;
+        for(int j=0;j<employeecount[i];j++)
+        {
+            if(highestsalary<jagged[i][j])
+            {
+                highestsalary=jagged[i][j];
+                count=j+1;
+            }
+            maxsalary[i]+=jagged[i][j];
+        }
+        cout<<"The highest salary of Department "<<i+1<<" is of Employee "<<count<<": $"<<highestsalary<<endl;
+        maxsalary[i]/=employeecount[i];
+    }
+    float maxdeptavg=0;
+    int dept;
+    for(int i=0;i<d;i++)
+    {
+        if(maxdeptavg<maxsalary[i])
+        {
+            maxdeptavg=maxsalary[i];
+            dept=i+1;
+        }
+    }
+    cout<<"Max department average salary is: "<<maxdeptavg<<" belonging to department "<<dept<<"."<<endl;
+    return 0;
+}
