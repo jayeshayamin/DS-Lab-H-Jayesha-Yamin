@@ -1,1 +1,60 @@
+#include<iostream>
+using namespace std;
 
+/*Task #10: Design a program that maintains library book records using dynamic arrays. => Each row represents a category (e.g., Fiction, Science, History). => Each category has a different number of books (use a jagged array). => Store book IDs dynamically and allow the user to search for a given book ID. => Print whether the book is available and in which category.*/
+int main()
+{
+    int categories;
+    cout<<"Enter number of categories: ";
+    cin>>categories;
+    
+    int** jagged=new int*[categories];
+    int* bookcount=new int[categories];
+    for(int i=0;i<categories;i++)
+    {
+        cout<<"Enter number of books for category "<<i+1<<": ";
+        cin>>bookcount[i];
+        jagged[i]=new int[bookcount[i]];
+    }
+    
+    for(int i=0;i<categories;i++)
+    {
+        cout<<"Category "<<i+1<<": "<<endl;
+        for(int j=0;j<bookcount[i];j++)
+        {
+            cout<<"Book "<<j+1<<" ID: "<<endl;
+            cin>>jagged[i][j];
+        }
+    }
+    bool found=0;
+    int search,categ;
+    cout<<"Enter Book ID to search: ";
+    cin>>search;
+    for(int i=0;i<categories;i++)
+    {
+        for(int j=0;j<bookcount[i];j++)
+        {
+            if(search==jagged[i][j])
+            {
+                found=1;
+                categ=i+1;
+            }
+        }
+    }
+    if(found==1)
+    {
+        cout<<"Book available in Category "<<categ<<"!"<<endl;
+        found=0;
+    }
+    else
+    {
+        cout<<"Book not avaialble. Enter valid Search ID."<<endl;
+    }
+    
+        for(int i=0;i<categories;i++)
+    {
+        delete[] jagged[i];
+    }
+    delete[] jagged;
+    return 0;
+}
