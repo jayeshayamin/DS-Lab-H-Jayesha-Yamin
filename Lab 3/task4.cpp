@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+  int data;
+  Node *next;
+};
+
+int main()
+{
+  int n, k;
+  cout << "Input number of players: ";
+  cin >> n;
+  cout << "\nInput number of skips: ";
+  cin >> k;
+
+  Node *head = nullptr;
+  Node *tail = nullptr;
+  for (int i = 0; i < n; i++)
+  {
+    Node *newnode = new Node();
+    newnode->data = i + 1;
+    newnode->next = nullptr;
+
+    if (head == nullptr)
+    {
+      head = newnode;
+      tail = newnode;
+    }
+    else
+    {
+      tail->next = newnode;
+      tail = newnode;
+    }
+    if (i == (n - 1))
+    {
+      tail->next = head;
+    }
+  }
+  int i = 1;
+  Node *temp2 = head;
+  Node *prev = nullptr;
+  while (temp2->next != temp2)
+  {
+    for (int count = 1; count < k; count++)
+    {
+      prev = temp2;
+      temp2 = temp2->next;
+    }
+    cout << "Eliminating: " << temp2->data << endl;
+    prev->next = temp2->next;
+    delete temp2;
+    temp2 = prev->next;
+  }
+
+  cout << "Survivors position: " << temp2->data << endl;
+  return 0;
+}
