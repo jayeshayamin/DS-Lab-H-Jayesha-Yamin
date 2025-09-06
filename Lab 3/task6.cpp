@@ -1,0 +1,96 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+  int data;
+  Node *child;
+  Node *next;
+};
+
+Node *Attachlist(Node *headmain, Node *headchild, int n)
+{
+
+  if (headmain == nullptr || headchild == nullptr)
+    return headmain;
+  int count = 1;
+  Node *traverse = headmain;
+  while (count < n)
+  {
+    count++;
+    traverse = traverse->next;
+  }
+  if (traverse != nullptr)
+  {
+    traverse->child = headchild;
+  }
+  else
+  {
+    cout << "Position " << n << " not found in main list.\n";
+  }
+  return headmain;
+}
+Node *Createlist(Node *head, int size)
+{
+  Node *tail = nullptr;
+  for (int i = 0; i < size; i++)
+  {
+    Node *newnode = new Node();
+    newnode->data = i + 1;
+    newnode->child = nullptr;
+    newnode->next = nullptr;
+
+    if (head == nullptr)
+    {
+      head = newnode;
+      tail = newnode;
+    }
+    else
+    {
+      tail->next = newnode;
+      tail = newnode;
+    }
+  }
+  return head;
+}
+int main()
+{
+  Node *headmain = nullptr;
+  Node *headchild = nullptr;
+
+  int main, child, n;
+  cout << "Enter size of main list: ";
+  cin >> main;
+  cout << "\nEnter size of child list: ";
+  cin >> child;
+  cout << "\nEnter element at which to attach child list to main list: ";
+  cin >> n;
+  headmain = Createlist(headmain, main);
+  headchild = Createlist(headchild, child);
+
+  headmain = Attachlist(headmain, headchild, n);
+
+  cout << "Flattening List...\n";
+  Node *temp = headmain;
+  int count = 0;
+  while (temp->child == nullptr)
+  {
+    temp = temp->next;
+  }
+  Node *holder = temp->next;
+  temp->next = temp->child;
+  while (temp->next != nullptr)
+  {
+    temp = temp->next;
+  }
+  temp->next = holder;
+
+  temp = headmain;
+  while (temp != nullptr)
+  {
+    cout << temp->data << " ";
+    temp = temp->next;
+  }
+  return 0;
+}
