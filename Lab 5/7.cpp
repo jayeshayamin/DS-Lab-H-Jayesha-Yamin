@@ -109,5 +109,7 @@ int main()
     delete[] board[i];
   }
   delete[] board;
+  return 0;
 }
+
 
