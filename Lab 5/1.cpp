@@ -3,9 +3,7 @@ using namespace std;
 
 int calculatefactorial(int n)
 {
-    if(n==1)
-    return 1;
-    if(n==0)
+    if(n==1 || n==0)
     return 1;
     return n*calculatefactorial(n-1);
 }
