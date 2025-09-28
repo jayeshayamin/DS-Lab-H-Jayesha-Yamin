@@ -12,9 +12,9 @@ void printnumbers(int n)
 void functionB(int n);
 void functionA(int n)
 {
-    if(n==0)
+    if(n==0 || n==1)
     {
-        cout<<0<<" ";
+        cout<<n<<" ";
         return;
     }
     functionB(n-1);
@@ -22,9 +22,9 @@ void functionA(int n)
 }
 void functionB(int n)
 {
-    if(n==1)
+    if(n==1||n==0)
     {
-        cout<<1<<" ";
+        cout<<n<<" ";
         return;
     }
     functionA( n-1);
