@@ -1,30 +1,49 @@
 #include <iostream>
-using namespace std;
-bool safe(char **board, int N, int row, int column)
+using namespace std;bool safe(char **board, int N, int row, int column)
 {
-  for (int j = 0; j < N; j++)
+  int i, j;
+
+  j = 0;
+  while (j < N) {
     if (board[row][j] == 'Q')
       return false;
+    j++;
+  }
 
-  for (int i = 0; i < N; i++)
+  i = 0;
+  while (i < N) {
     if (board[i][column] == 'Q')
       return false;
+    i++;
+  }
 
-  for (int i = row, j = column; i >= 0 && j >= 0; i--, j--)
+  i = row; j = column;
+  while (i >= 0 && j >= 0) {
     if (board[i][j] == 'Q')
       return false;
+    i--; j--;
+  }
 
-  for (int i = row, j = column; i >= 0 && j < N; i--, j++)
+  i = row; j = column;
+  while (i >= 0 && j < N) {
     if (board[i][j] == 'Q')
       return false;
+    i--; j++;
+  }
 
-  for (int i = row, j = column; i < N && j >= 0; i++, j--)
+  i = row; j = column;
+  while (i < N && j >= 0) {
     if (board[i][j] == 'Q')
       return false;
+    i++; j--;
+  }
 
-  for (int i = row, j = column; i < N && j < N; i++, j++)
+  i = row; j = column;
+  while (i < N && j < N) {
     if (board[i][j] == 'Q')
       return false;
+    i++; j++;
+  }
 
   return true;
 }
@@ -91,3 +110,4 @@ int main()
   }
   delete[] board;
 }
+
